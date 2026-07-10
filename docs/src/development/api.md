@@ -699,7 +699,8 @@ Example:
 ```python
 import requests
 payload={"groups": [1,2,3]}
-url = "https://development.demo.geonode.org/api/v2/users/1000/remove_from_group_manager"
+url = "https://development.demo.geonode.org/
+/1000/remove_from_group_manager"
 headers = {
     'Authorization': 'Basic dXNlcjpwYXNzd29yZA=='
 }

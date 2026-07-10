@@ -33,18 +33,29 @@
 
     <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
 
-    <link rel="shortcut icon" href="{% static 'geonode/img/favicon.ico' %}" />
+    <link rel="shortcut icon" href="{% static 'geonode/img/8d/logo-icon.png' %}" />
+    <link rel="icon" type="image/png" href="{% static 'geonode/img/8d/logo-icon.png' %}" />
     <link rel="preload" as="style" href="{% static "geonode/css/font-awesome.min.css" %}" />
     <link rel="preload" as="font" href="{% static "geonode/fonts/lato_regular.ttf" %}" crossorigin="" />
     <link rel="preload" as="font" href="{% static "geonode/fonts/lato_bold.ttf" %}" crossorigin="" />
     <link rel="preload" as="font" href="{% static "geonode/fonts/lato_light.ttf" %}" crossorigin="" />
 
+    <!-- Font Awesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- 8D Tecnologia Design Tokens -->
+    <link href="{% static "geonode/css/brand-tokens.css" %}?v=20260709" rel="stylesheet"/>
+    <!-- Custom CSS - Always loaded -->
+    <link href="{% static "geonode/css/custom.css" %}?v=20260709" rel="stylesheet"/>
+
     {% block head %}
       <link href="{% static "geonode/css/base.css" %}" rel="stylesheet"/>
       <link rel='stylesheet' id='cookie-law-info-css'  href="{% static "geonode/css/cookie-law-info/cookie-law-info-public.css" %}" type='text/css' media='all' />
       <link rel='stylesheet' id='cookie-law-info-gdpr-css'  href="{% static "geonode/css/cookie-law-info/cookie-law-info-gdpr.css" %}" type='text/css' media='all' />
+      <link href="{% static "geonode/css/brand-tokens.css" %}?v=20260709" rel="stylesheet"/>
+      <link href="{% static "geonode/css/custom.css" %}?v=20260709" rel="stylesheet"/>
       <style type="text/css">[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}</style>
-      
+
       {% block extra_head %}
       {% endblock %}
     {% endblock %}
@@ -108,6 +119,7 @@
     <script src="{% static "geonode/js/utils/utils.js" %}"></script>
     <script src="{% static "geonode/js/base/base.js" %}"></script>
     <script type="text/javascript" src="{% url "javascript-catalog" %}"></script>
+
     {% block extra_script %}{% endblock extra_script %}
 
   </body>

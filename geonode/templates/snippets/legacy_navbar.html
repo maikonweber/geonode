@@ -1,0 +1,106 @@
+{% load static %}
+{% load i18n %}
+{% load base_tags %}
+{% load avatar_tags %}
+
+{% comment %}
+Navbar para páginas legacy do GeoNode (login, signup, profile, etc.)
+Este arquivo é incluído automaticamente no base.html para páginas que não usam o MapStore.
+{% endcomment %}
+
+<nav id="gn-legacy-navbar" class="navbar navbar-default navbar-fixed-top gn-legacy-navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#gn-legacy-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                {% if custom_theme.logo and custom_theme.logo.url %}
+                <img src="{{ custom_theme.logo.url }}" alt="{% trans 'Logo' %}" class="gn-brand-logo"
+                    style="height: 30px;">
+                {% else %}
+                <img src="{% static 'geonode/img/8d/logo-dark.png' %}" alt="8D Tecnologia" class="gn-brand-logo"
+                    style="height: 30px;">
+                {% endif %}
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="gn-legacy-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/catalogue/">{% trans "Dados" %}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        {% trans "Explorar" %} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/catalogue/#/search/?f=dataset">{% trans "Datasets" %}</a></li>
+                        <li><a href="/catalogue/#/search/?f=document">{% trans "Documentos" %}</a></li>
+                        <li><a href="/catalogue/#/search/?f=map">{% trans "Mapas" %}</a></li>
+                        <li><a href="/catalogue/#/search/?f=geostory">{% trans "GeoStories" %}</a></li>
+                        <li><a href="/catalogue/#/search/?f=dashboard">{% trans "Dashboards" %}</a></li>
+                    </ul>
+                </li>
+                <li><a href="/about/">{% trans "Sobre" %}</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% comment %} Seletor de idioma {% endcomment %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                        {% if lang_code == LANGUAGE_CODE %}
+                        {{ lang_name }}
+                        {% endif %}
+                        {% endfor %}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for lang_code, lang_name in LANGUAGES %}
+                        <li{% if lang_code==LANGUAGE_CODE %} class="active" {% endif %}>
+                            <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="language" value="{{ lang_code }}">
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                                <button type="submit" class="btn-link-lang">{{ lang_name }}</button>
+                            </form>
+                </li>
+                {% endfor %}
+            </ul>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false">
+                    {% avatar user 24 class="gn-user-avatar" %}
+                    {{ user.username }} <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'profile_detail' user.username %}">{% trans "Perfil" %}</a></li>
+                    <li><a href="/catalogue/#/search/?owner={{ user.username }}">{% trans "Meus Recursos" %}</a></li>
+                    {% if user.is_staff %}
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'admin:index' %}">{% trans "Admin" %}</a></li>
+                    {% endif %}
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'account_logout' %}">{% trans "Sair" %}</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a href="{% url 'account_login' %}">{% trans "Entrar" %}</a></li>
+            {% if REGISTRATION_OPEN %}
+            <li><a href="{% url 'account_signup' %}">{% trans "Registrar" %}</a></li>
+            {% endif %}
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

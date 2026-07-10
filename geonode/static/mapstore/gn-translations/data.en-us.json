@@ -1,0 +1,9 @@
+{
+    "locale": "en-us",
+    "messages": {
+        "gnhome.hero.title": "GeoSky",
+        "gnhome.hero.description": "Compartilhando dados geoespaciais e mapas",
+        "gnhome.jumbotron.title": "GeoSky",
+        "gnhome.jumbotron.description": "Compartilhando dados geoespaciais e mapas"
+    }
+}

@@ -1,0 +1,51 @@
+{% load static %}
+<div class="resource-card">
+  <div class="resource-card-image-wrapper">
+    {% if resource.thumbnail_url %}
+      <img src="{{ resource.thumbnail_url }}" alt="{{ resource.title }}" class="resource-card-image" onerror="this.onerror=null;this.classList.add('resource-card-image--broken')" />
+    {% else %}
+      <div class="resource-card-image resource-card-image--placeholder"></div>
+    {% endif %}
+    
+  </div>
+
+  <div class="resource-card-body">
+    <div class="resource-card-meta">
+      <div class="resource-card-meta-left">
+        {% if resource_type_label %}
+          <span class="resource-card-badge">
+            <i class="fa-solid {{ resource_type_icon|default:'fa-database' }}"></i>
+            {{ resource_type_label }}
+          </span>
+        {% else %}
+          {% with ctype=resource.polymorphic_ctype.model %}
+            {% if ctype == 'map' %}
+              <span class="resource-card-badge"><i class="fa-solid fa-map"></i> MAPA</span>
+            {% elif ctype == 'dataset' %}
+              <span class="resource-card-badge"><i class="fa-solid fa-database"></i> DATASET</span>
+            {% elif ctype == 'document' %}
+              <span class="resource-card-badge"><i class="fa-solid fa-file-lines"></i> DOCUMENTO</span>
+            {% elif ctype == 'geoapp' %}
+              <span class="resource-card-badge"><i class="fa-solid fa-bolt"></i> APP</span>
+            {% else %}
+              <span class="resource-card-badge"><i class="fa-solid fa-cube"></i> RECURSO</span>
+            {% endif %}
+          {% endwith %}
+        {% endif %}
+      </div>
+      <button class="resource-card-favorite" data-resource-id="{{ resource.pk }}">
+        <i class="{% if resource.favorite %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+      </button>
+    </div>
+
+    <h3 class="resource-card-title">{{ resource.title|truncatechars:50 }}</h3>
+    <p class="resource-card-description">
+      {% if resource.abstract %}
+        {{ resource.abstract|striptags|truncatechars:80 }}
+      {% else %}
+        Breve descrição relacionada a esse tópico.
+      {% endif %}
+    </p>
+    <a href="{{ resource.detail_url }}" class="resource-card-button">Abrir Propriedades</a>
+  </div>
+</div>

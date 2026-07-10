@@ -1,0 +1,42 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapas - 8D Tecnologia</title>
+    <link rel="icon" type="image/png" href="{% static 'catalogue_custom/img/8d/logo-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'geonode/css/brand-tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/navbar_internal.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/catalogue.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    {% include 'snippets/navbar_internal.html' %}
+
+    <!-- IFRAME com o catálogo do GeoNode filtrado por mapas -->
+    <div class="catalogue-iframe-container">
+      <iframe
+        id="catalogue-iframe"
+        src="/catalogue/#/?filter{resource_type.in}=map"
+        frameborder="0"
+        onload="hideMapStoreHeader()"
+        style="width: 100%; height: calc(100vh - 80px); border: none;">
+      </iframe>
+    </div>
+
+    <!-- Scripts do GeoNode para funcionalidades -->
+    <script>
+      window.SITEURL = '{{ SITEURL }}';
+    </script>
+    <script src="{% static 'catalogue_custom/js/brand-nav.js' %}"></script>
+    <script src="{% static 'catalogue_custom/js/maps.js' %}?v={{ timestamp|default:'1' }}"></script>
+    {% block extra_script %}{% endblock %}
+  </body>
+</html>

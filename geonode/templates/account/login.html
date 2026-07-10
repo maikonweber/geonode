@@ -1,44 +1,157 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
+{% load static %}
 {% load bootstrap_tags %}
 {% load account socialaccount %}
+{% load base_tags %}
 
 {% block head_title %}{% trans "Log in" %}{% endblock %}
 
-{% block body_outer %}
-  <div class="page-header">
-    <h2>{% trans "Log in to an existing account" %}</h2>
-  </div>
+{% block body_class %}gn-legacy login-page{% endblock %}
 
+{% block extra_head %}
+<style>
+  body.login-page {
+    background-color: #111111 !important;
+    background-image:
+      linear-gradient(135deg, rgba(17, 17, 17, 0.45) 0%, rgba(43, 43, 43, 0.25) 55%, rgba(244, 180, 0, 0.1) 100%),
+      url('{% static "geonode/img/wireframe-gold.png" %}?v=20260710') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+  }
+
+  body.login-page .col-md-8 {
+    background: rgba(43, 43, 43, 0.92) !important;
+    border: 1px solid rgba(244, 180, 0, 0.28) !important;
+    border-radius: 16px !important;
+    padding: 40px 36px !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    max-width: 420px !important;
+  }
+
+  body.login-page .login-logo {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-top: 0;
+  }
+
+  body.login-page .login-logo img {
+    max-height: 88px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    background: transparent !important;
+  }
+
+  body.login-page label,
+  body.login-page .checkbox label,
+  body.login-page .form-group label {
+    color: rgba(255, 255, 255, 0.88) !important;
+    font-weight: 500 !important;
+    margin-bottom: 8px !important;
+  }
+
+  body.login-page .form-control {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 12px 14px !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  body.login-page .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+
+  body.login-page .form-control:focus {
+    border-color: #F4B400 !important;
+    box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.25) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    outline: none !important;
+  }
+
+  body.login-page a {
+    color: #F4B400 !important;
+  }
+
+  body.login-page a:hover {
+    color: #FFC107 !important;
+  }
+
+  body.login-page .btn-primary {
+    width: 100% !important;
+    background: linear-gradient(135deg, #F4B400 0%, #D68A00 100%) !important;
+    border: none !important;
+    border-color: transparent !important;
+    color: #111111 !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    padding: 12px 20px !important;
+    margin-top: 8px !important;
+    letter-spacing: 0.2px;
+  }
+
+  body.login-page .btn-primary:hover,
+  body.login-page .btn-primary:focus {
+    background: #D68A00 !important;
+    color: #111111 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(244, 180, 0, 0.28) !important;
+  }
+
+  body.login-page input[type="checkbox"] {
+    accent-color: #F4B400;
+  }
+
+  body.login-page .form-group {
+    margin-bottom: 18px !important;
+  }
+</style>
+{% endblock %}
+
+{% block body_outer %}
 <div class="row">
   <div class="col-md-8">
+    {% comment %} Logo da empresa - dentro do card {% endcomment %}
+    <div class="login-logo">
+      <img src="{% static 'geonode/img/8d/logo-dark.png' %}?v=20260709g" alt="8D Tecnologia">
+    </div>
 
     {% get_providers as socialaccount_providers %}
 
     {% if socialaccount_providers %}
-      <p>{% blocktrans with site.name as site_name %}Please sign in with one
+    <p>{% blocktrans with site.name as site_name %}Please sign in with one
       of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
       for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-      <div class="socialaccount_ballot">
-        <ul class="socialaccount_providers">
-          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-        </ul>
+    <div class="socialaccount_ballot">
+      <ul class="socialaccount_providers">
+        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+      </ul>
 
-        <div class="login-or">{% trans 'or' %}</div>
-      </div>
+      <div class="login-or">{% trans 'or' %}</div>
+    </div>
 
-      {% include "socialaccount/snippets/login_extra.html" %}
+    {% include "socialaccount/snippets/login_extra.html" %}
 
     {% else %}
-      <p>{% blocktrans %}If you have not created an account yet, then please
-      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    <!-- <p>{% blocktrans %}If you have not created an account yet, then please
+      <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+    </p> -->
     {% endif %}
-    <form role="form" method="POST" action="{% url 'account_login' %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+    <form role="form" method="POST" action="{% url 'account_login' %}" autocapitalize="off" {% if form.is_multipart %}
+      enctype="multipart/form-data" {% endif %}>
       {% csrf_token %}
       {{ form|as_bootstrap }}
       {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
       <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
     </form>

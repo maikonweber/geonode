@@ -1,0 +1,323 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8D Tecnologia</title>
+    <link rel="icon" type="image/png" href="{% static 'home_custom/img/8d/logo-icon.png' %}?v=20260709f" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'home_custom/img/8d/logo-icon.png' %}?v=20260709f" />
+    <link rel="stylesheet" href="{% static 'geonode/css/brand-tokens.css' %}?v=20260710" />
+    <link rel="stylesheet" href="{% static 'home_custom/css/home.css' %}?v=20260710k" />
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <!-- FIM FONT -->
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a href="/" class="navbar-brand"><img src="{% static 'geonode/img/8d/logo-dark.png' %}?v=20260709f" alt="8D Tecnologia" /></a>
+
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Menu" type="button">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="navbar-menu" id="navbarMenu">
+       <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/catalogue/#/">Todos os Recursos</a>
+    </li>
+    <li>
+      <a href="/datasets/">Datasets</a>
+    </li>
+    <li>
+      <a href="/documents/">Documentos</a>
+    </li>
+    <li>
+      <a href="/maps/">Mapas</a>
+    </li>
+    <li>
+      <a href="/geostories/">GeoStories</a>
+    </li>
+    <li>
+      <a href="/dashboards/">Dashboards</a>
+    </li>
+    <li>
+      <a href="/about">Sobre</a>
+    </li>
+      </ul>
+
+      <div class="navbar-actions">
+        <input type="text" class="navbar-search" placeholder="Search..." />
+        <!--   <select class="theme-selector" id="themeSelector">
+                <option value="theme-default">Azul (Padrão)</option>
+                <option value="theme-green">Verde</option>
+                <option value="theme-purple">Roxo</option>
+                <option value="theme-orange">Laranja</option>
+            </select>   -->
+        <select class="navbar-lang">
+          <option>Português Brasileiro</option>
+        </select>
+        <div class="navbar-user">
+          <button class="navbar-user-button" id="userMenuButton">
+            {% if user.is_authenticated %}
+              {{ user.username|slice:':1'|upper }}
+            {% else %}
+              ?
+            {% endif %}
+          </button>
+          <div class="navbar-user-dropdown" id="userMenuDropdown">
+            {% if user.is_authenticated %}
+              <a href="/people/profile/{{ user.username }}/">Perfil</a>
+              <a href="/social/recent-activity">Atividade recente</a>
+              <a href="/catalogue/search/#/?f=favorite">Favoritos</a>
+              <hr />
+              <a href="/admin/">Admin</a>
+              <a href="/geoserver/">GeoServer</a>
+              <hr />
+              <a href="/people/">Pessoas</a>
+              <a href="/groups/">Grupos</a>
+              <a href="/invitations/">Invite users</a>
+              <a href="/admin/people/profile/add/">Add user</a>
+              <a href="/groups/create/">Create group</a>
+              <hr />
+              <a href="/help/">Ajuda</a>
+              <a href="/account/logout/">Sair</a>
+            {% else %}
+              <a href="/account/login/">Entrar</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">8D Tecnologia</h1>
+        <p class="hero-subtitle">Plataforma geoespacial para compartilhamento de dados, mapas e análises.</p>
+
+        {% comment %} <div class="hero-dots">
+          <span class="hero-dot active"></span>
+          <span class="hero-dot"></span>
+          <span class="hero-dot"></span>
+        </div> {% endcomment %}
+      </div>
+    </section>
+
+    <!-- CARROUSEL DE RECURSOS -->
+    <section class="resources-section">
+      <div class="resources-header">
+        <h2 class="resources-title">Todos os recursos</h2>
+        <div class="resources-actions">
+          <div class="dropdown-add-resource">
+            <button class="btn-add-resource" id="btnAddResource">Adicionar Recurso</button>
+            <div class="dropdown-add-resource-menu" id="addResourceMenu">
+              <a href="/catalogue/#/upload/dataset">Carregar conjunto de dados</a>
+              <a href="/catalogue/#/upload/document">Carregar documento</a>
+              <a href="/catalogue/#/create/dataset">Criar conjunto de dados</a>
+              <a href="/catalogue/#/map/new">Criar mapa</a>
+              <a href="/catalogue/#/geostory/new">Criar geostory</a>
+              <a href="/catalogue/#/dashboard/new">Criar painel</a>
+              <a href="/services/?limit=5">Serviços remotos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls" id="carouselControls">
+        <button class="carousel-arrow" onclick="scrollCarousel(-1)" aria-label="Anterior">‹</button>
+        <button class="carousel-arrow" onclick="scrollCarousel(1)" aria-label="Próximo">›</button>
+      </div>
+
+      <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+          {% for resource in featured_resources|slice:":12" %}
+            <div class="resource-card">
+              <div class="resource-card-image-wrapper">
+                {% if resource.thumbnail_url %}
+                  <img src="{{ resource.thumbnail_url }}" alt="{{ resource.title }}" class="resource-card-image" onerror="this.onerror=null;this.parentElement.classList.add('resource-card-image-wrapper--placeholder'); this.remove();" />
+                {% else %}
+                  <div class="resource-card-image-placeholder" aria-hidden="true">
+                    {% if resource.polymorphic_ctype.model == 'map' %}
+                      <i class="fa-solid fa-map"></i>
+                    {% elif resource.polymorphic_ctype.model == 'dataset' %}
+                      <i class="fa-solid fa-database"></i>
+                    {% elif resource.polymorphic_ctype.model == 'document' %}
+                      <i class="fa-solid fa-file-lines"></i>
+                    {% elif resource.polymorphic_ctype.model == 'geoapp' %}
+                      <i class="fa-solid fa-chart-pie"></i>
+                    {% else %}
+                      <i class="fa-solid fa-cube"></i>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                <div class="resource-card-menu-wrapper">
+                  <button class="resource-card-menu-btn" data-resource-id="{{ resource.id }}"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                  <div class="resource-card-menu-dropdown">
+                    <a href="#" class="resource-menu-item resource-properties" data-resource-id="{{ resource.id }}" data-resource-url="/api/v2/resources/{{ resource.id }}"><i class="fa-solid fa-circle-info"></i> Abrir Propriedades</a>
+                    <a href="#" class="resource-menu-item resource-clone" data-resource-id="{{ resource.id }}" data-resource-title="{{ resource.title }}" data-resource-type="{{ resource.polymorphic_ctype.model }}"><i class="fa-solid fa-copy"></i> Clonar</a>
+                    <a href="#" class="resource-menu-item resource-delete" data-resource-id="{{ resource.id }}" data-resource-title="{{ resource.title }}"><i class="fa-solid fa-trash-can"></i> Excluir</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="resource-card-body">
+                <div class="resource-card-header">
+                  {% if resource.polymorphic_ctype.model == 'map' %}
+                    <span class="resource-card-badge"><i class="fa-solid fa-map"></i> MAPA</span>
+                  {% elif resource.polymorphic_ctype.model == 'dataset' %}
+                    <span class="resource-card-badge"><i class="fa-solid fa-database"></i> DATASET</span>
+                  {% elif resource.polymorphic_ctype.model == 'document' %}
+                    <span class="resource-card-badge"><i class="fa-solid fa-file-lines"></i> DOCUMENTO</span>
+                  {% elif resource.polymorphic_ctype.model == 'geoapp' %}
+                    <span class="resource-card-badge"><i class="fa-solid fa-bolt"></i> APP</span>
+                  {% else %}
+                    <span class="resource-card-badge"><i class="fa-solid fa-cube"></i> RECURSO</span>
+                  {% endif %}
+                  <button class="resource-card-favorite"
+                    data-resource-id="{{ resource.id }}"
+                    style="color: {% if resource.favorite %}#ff6b6b{% else %}rgba(255, 255, 255, 0.5){% endif %}">
+                    <i class="{% if resource.favorite %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                  </button>
+                </div>
+
+                <h3 class="resource-card-title">{{ resource.title|truncatechars:40 }}</h3>
+                <p class="resource-card-description">
+                  {% if resource.abstract %}
+                    {{ resource.abstract|striptags|truncatechars:80 }}
+                  {% else %}
+                    Sem descrição disponível.
+                  {% endif %}
+                </p>
+                <a href="{{ resource.custom_detail_url|default:resource.detail_url }}" class="resource-card-button">Ver Detalhes</a>
+              </div>
+            </div>
+          {% empty %}
+            {% include 'home_custom/snippets/resource_category_cards.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO EXPLORAR -->
+    <section class="explore-section">
+      <div class="explore-container">
+        <h2 class="explore-title" id="explorar">Explorar</h2>
+
+        <div class="explore-grid">
+          <!-- Main Content -->
+          <div class="explore-main">
+            <img src="{% static 'geonode/img/image_maior.png' %}" alt="Geostories" class="explore-main-image" />
+            <div class="explore-main-content">
+              <h3 class="explore-main-title">Geostories</h3>
+              <p class="explore-main-description">Crie narrativas geográficas interativas combinando mapas, imagens e textos para comunicar histórias com dados espaciais.</p>
+              <a href="/geostories/" class="explore-link">Explorar GeoStories</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Items -->
+          <div class="explore-sidebar">
+            <!-- Dashboards -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image_3.png' %}" alt="Dashboards" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Dashboards</h4>
+                <p class="explore-sidebar-description">Visualize indicadores e métricas em painéis dinâmicos conectados aos seus dados geoespaciais.</p>
+                <a href="/dashboards/" class="explore-link">Ver Dashboards</a>
+              </div>
+            </div>
+
+            <!-- Mapas -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image_2.png' %}" alt="Mapas" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Mapas</h4>
+                <p class="explore-sidebar-description">Monte e compartilhe mapas web com camadas, estilos e ferramentas de análise integradas.</p>
+                <a href="/maps/" class="explore-link">Ver Mapas</a>
+              </div>
+            </div>
+
+            <!-- Documentos -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image.png' %}" alt="Documentos" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Documentos</h4>
+                <p class="explore-sidebar-description">Armazene, organize e publique documentos técnicos, relatórios e materiais de apoio ao projeto.</p>
+                <a href="/documents/" class="explore-link">Ver Documentos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    {% include 'snippets/footer.html' %}
+
+    <!-- Modal de confirmação de exclusão -->
+    <div id="deleteModal" class="delete-modal" style="display: none;">
+      <div class="delete-modal-content">
+        <p class="delete-modal-title">Tem certeza que quer excluir este recurso?</p>
+        <p id="deleteModalResourceTitle" class="delete-modal-resource-title"></p>
+        <div class="delete-modal-buttons">
+          <button id="deleteModalCancel" class="delete-modal-btn delete-modal-btn-cancel">Não, não exclua</button>
+          <button id="deleteModalConfirm" class="delete-modal-btn delete-modal-btn-confirm">Sim, tenho certeza</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de clonagem -->
+    <div id="cloneModal" class="delete-modal" style="display: none;">
+      <div class="delete-modal-content">
+        <p class="delete-modal-title">Digite o título para a cópia:</p>
+        <input type="text" id="cloneModalInput" class="clone-modal-input" placeholder="Nome do recurso" />
+        <div class="delete-modal-buttons">
+          <button id="cloneModalCancel" class="delete-modal-btn delete-modal-btn-cancel">Cancelar</button>
+          <button id="cloneModalConfirm" class="delete-modal-btn delete-modal-btn-confirm">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de remoção de thumbnail -->
+    <div id="removeThumbnailModal" class="delete-modal" style="display: none;">
+      <div class="delete-modal-content">
+        <p class="delete-modal-title">Tem certeza que deseja remover a thumbnail?</p>
+        <div class="delete-modal-buttons">
+          <button id="removeThumbnailCancel" class="delete-modal-btn delete-modal-btn-cancel">Cancelar</button>
+          <button id="removeThumbnailConfirm" class="delete-modal-btn delete-modal-btn-confirm">Sim, remover</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel lateral de propriedades -->
+    <div id="propertiesPanel" class="properties-panel">
+      <div class="properties-panel-header">
+        <button class="properties-panel-close" id="propertiesPanelClose">&times;</button>
+      </div>
+      <div class="properties-panel-content" id="propertiesPanelContent">
+        <div class="properties-loading">Carregando...</div>
+      </div>
+    </div>
+
+    <!-- Overlay para fechar o painel clicando fora -->
+    <div id="propertiesPanelOverlay" class="properties-panel-overlay"></div>
+
+    <script src="{% static 'home_custom/js/home.js' %}"></script>
+  </body>
+</html>
+<!-- test 1770659202 -->

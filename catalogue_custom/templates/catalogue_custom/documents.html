@@ -1,0 +1,94 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentos - 8D Tecnologia</title>
+    <link rel="icon" type="image/png" href="{% static 'catalogue_custom/img/8d/logo-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'geonode/css/brand-tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/navbar_internal.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/catalogue.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    {% include 'snippets/navbar_internal.html' %}
+
+    <!-- IFRAME com o catálogo do GeoNode filtrado por documentos -->
+    <div class="catalogue-iframe-container">
+      <iframe
+        id="catalogue-iframe"
+        src="/catalogue/#/?filter{resource_type.in}=document"
+        frameborder="0"
+        onload="hideMapStoreHeader()"
+        style="width: 100%; height: calc(100vh - 80px); border: none;">
+      </iframe>
+    </div>
+
+    <!-- Scripts do GeoNode para funcionalidades -->
+    <script src="{% static 'catalogue_custom/js/brand-nav.js' %}"></script>
+    <script>
+      var siteUrl = '{{ SITEURL }}'.replace(/\/?$/, '/');
+
+      // Função para ocultar header e footer do MapStore
+      function hideMapStoreHeader() {
+        try {
+          const iframe = document.getElementById('catalogue-iframe');
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+          // Injeta CSS para ocultar header e footer
+          const style = iframeDoc.createElement('style');
+          style.textContent = `
+            .gn-menu, .ms-header, header, nav.navbar, .top-bar {
+              display: none !important;
+            }
+            footer, .footer, .gn-footer, .ms-footer, .footer-custom {
+              display: none !important;
+            }
+            body {
+              padding-top: 0 !important;
+              margin-top: 0 !important;
+              padding-bottom: 0 !important;
+              margin-bottom: 0 !important;
+            }
+            #ms-container, #gn-container {
+              padding-top: 20px !important;
+              padding-bottom: 0 !important;
+            }
+            .container, main, #root {
+              padding-bottom: 0 !important;
+              margin-bottom: 0 !important;
+            }
+          `;
+          iframeDoc.head.appendChild(style);
+        } catch(e) {
+          console.log('Não foi possível acessar iframe (CORS):', e);
+        }
+      }
+
+      // Toggle user menu
+      document.addEventListener('DOMContentLoaded', function() {
+        const userButton = document.getElementById('userMenuButton');
+        const userDropdown = document.getElementById('userMenuDropdown');
+
+        if (userButton && userDropdown) {
+          userButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('show');
+          });
+
+          document.addEventListener('click', function() {
+            userDropdown.classList.remove('show');
+          });
+        }
+      });
+    </script>
+    {% block extra_script %}{% endblock %}
+  </body>
+</html>

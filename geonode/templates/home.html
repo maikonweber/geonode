@@ -1,0 +1,503 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block custom_theme %}
+<style>
+    /* ===========================================
+   CSS CRÍTICO - CARREGA PRIMEIRO
+   Usando especificidade máxima para garantir
+   que os estilos sejam aplicados antes do React
+   =========================================== */
+
+    /* Reset agressivo para botões na navbar */
+    html body #ms-container .gn-main-header .btn,
+    html body #ms-container .gn-main-header .btn-default,
+    html body #ms-container .gn-main-header .btn-tray,
+    html body #ms-container .gn-main-header button,
+    html body .msgapi .gn-main-header .btn,
+    html body .msgapi .gn-main-header .btn-default,
+    html body .msgapi .gn-main-header .btn-tray,
+    html body .msgapi .gn-main-header button {
+        background-color: transparent !important;
+        background-image: none !important;
+        background: transparent !important;
+        border: 0 !important;
+        border-width: 0 !important;
+        border-style: none !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        outline: 0 !important;
+        color: #ffffff !important;
+    }
+
+    /* Override Bootstrap btn-default especificamente - APENAS na navbar */
+    html body .gn-main-header .btn-default,
+    html body .msgapi .gn-main-header .btn-default,
+    html body #ms-container .gn-main-header .btn-default {
+        background-color: transparent !important;
+        background-image: none !important;
+        border: 0 !important;
+        border-color: transparent !important;
+    }
+
+    /* Navbar fundo sólido desde o início */
+    html body .gn-main-header,
+    html body .msgapi .gn-main-header,
+    html body #ms-container .gn-main-header {
+        background-color: #2B2B2B !important;
+    }
+
+    /* ===========================================
+   TEMA CUSTOMIZADO DO GEONODE
+   =========================================== */
+
+    /* Variáveis CSS do MapStore */
+    .msgapi .gn-theme {
+        --ms-primary: #F4B400;
+        --ms-primary-contrast: #ffffff;
+        --ms-info: #FFC107;
+        --ms-success: #58cf80;
+        --ms-warning: #ebbc35;
+        --ms-danger: #bb4940;
+        --ms-main-color: #000000;
+        --ms-main-bg: #ffffff;
+        --ms-main-border-color: #dddddd;
+        --ms-link-color: #F4B400;
+        --ms-link-hover-color: #D68A00;
+        --ms-jumbotron-color: #ffffff;
+        --ms-jumbotron-bg: #2B2B2B;
+        --ms-button-primary-bg: #F4B400;
+        --ms-button-primary-border-color: #F4B400;
+        --ms-button-primary-hover-bg: #D68A00;
+        --ms-font-family-sans-serif: 'Montserrat', sans-serif;
+        --ms-font-family-base: var(--ms-font-family-sans-serif);
+    }
+
+    /* ===========================================
+   NAVBAR
+   =========================================== */
+    .msgapi .gn-main-header {
+        background-color: #2B2B2B !important;
+    }
+
+    .msgapi #gn-brand-navbar {
+        background-color: #2B2B2B !important;
+    }
+
+    .msgapi .gn-brand-navbar-container {
+        background-color: transparent !important;
+    }
+
+    .msgapi .gn-menu a,
+    .msgapi .gn-main-header a {
+        color: #ffffff !important;
+    }
+
+    .msgapi .gn-menu a:hover,
+    .msgapi .gn-main-header a:hover {
+        color: #FFC107 !important;
+    }
+
+    /* ===========================================
+   CAMPO DE BUSCA NA NAVBAR
+   =========================================== */
+    .msgapi .gn-main-header .gn-search-bar,
+    .msgapi .gn-main-header [class*="search-bar"],
+    .msgapi .gn-main-header .gn-filter-form,
+    .msgapi .gn-main-header .input-group,
+    .msgapi .gn-main-header form[class*="search"],
+    .msgapi .gn-main-header .gn-search-bar-container {
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        background-color: transparent !important;
+    }
+
+    .msgapi .gn-main-header input[type="text"],
+    .msgapi .gn-main-header input[type="search"],
+    .msgapi .gn-main-header .form-control,
+    .msgapi .gn-main-header .gn-search-bar input,
+    .msgapi .gn-main-header .gn-filter-form input {
+        background-color: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+        padding: 8px 12px !important;
+    }
+
+    .msgapi .gn-main-header input::placeholder {
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .msgapi .gn-main-header .gn-search-bar .glyphicon,
+    .msgapi .gn-main-header .gn-search-bar .fa,
+    .msgapi .gn-main-header .gn-search-bar svg,
+    .msgapi .gn-main-header .gn-filter-form .glyphicon,
+    .msgapi .gn-main-header .gn-filter-form svg,
+    .msgapi .gn-main-header [class*="search"] .glyphicon,
+    .msgapi .gn-main-header [class*="search"] svg {
+        color: rgba(255, 255, 255, 0.7) !important;
+        fill: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .msgapi .gn-main-header .input-group-btn .btn,
+    .msgapi .gn-main-header .gn-search-bar .btn,
+    .msgapi .gn-main-header .gn-filter-form .btn {
+        background-color: transparent !important;
+        border: none !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    /* ===========================================
+   REMOVER BORDAS DOS BOTÕES NA NAVBAR
+   =========================================== */
+    .msgapi .gn-main-header .btn,
+    .msgapi .gn-main-header .btn-default,
+    .msgapi .gn-main-header .btn-tray,
+    .msgapi .gn-main-header button,
+    .msgapi .gn-main-header [role="button"],
+    .msgapi .gn-main-header .gn-menu-index .btn,
+    .msgapi .gn-main-header .gn-menu-index button,
+    .msgapi .gn-main-header .gn-menu-index a.btn,
+    .msgapi .gn-main-header nav .btn,
+    .msgapi .gn-main-header .navbar-nav .btn,
+    .msgapi .gn-main-header .navbar-nav>li>a,
+    .msgapi #gn-brand-navbar .btn,
+    .msgapi #gn-brand-navbar .btn-default,
+    .msgapi #gn-brand-navbar button {
+        background-color: transparent !important;
+        background-image: none !important;
+        background: transparent !important;
+        border: none !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+        color: #ffffff !important;
+    }
+
+    .msgapi .gn-main-header .gn-menu-index a,
+    .msgapi .gn-main-header .gn-menu-index-link,
+    .msgapi .gn-main-header .gn-action-navbar-container a,
+    .msgapi .gn-main-header .gn-action-navbar-container .btn {
+        background: transparent !important;
+        border: none !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+    }
+
+    /* ===========================================
+   SELETOR DE IDIOMAS
+   =========================================== */
+    .msgapi .gn-main-header .gn-language-selector,
+    .msgapi .gn-main-header .gn-language-selector .btn,
+    .msgapi .gn-main-header .gn-language-selector button,
+    .msgapi .gn-main-header [class*="language"],
+    .msgapi .gn-main-header [class*="locale"],
+    .msgapi .gn-action-navbar-container .btn,
+    .msgapi .gn-action-navbar-container button,
+    .msgapi .gn-user-dropdown .btn,
+    .msgapi .gn-user-dropdown button {
+        background-color: transparent !important;
+        background-image: none !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        color: #ffffff !important;
+    }
+
+    .msgapi .gn-main-header .dropdown-toggle,
+    .msgapi .gn-main-header .gn-language-selector .dropdown-toggle {
+        background-color: transparent !important;
+        background: transparent !important;
+        border: none !important;
+        color: #ffffff !important;
+    }
+
+    /* ===========================================
+   DROPDOWN MENUS
+   =========================================== */
+    .msgapi .gn-main-header .dropdown-menu,
+    .msgapi .gn-language-selector .dropdown-menu,
+    .msgapi .gn-main-header .gn-localized-dropdown .dropdown-menu,
+    html body .gn-main-header .dropdown-menu {
+        background-color: #2B2B2B !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 4px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        padding: 8px 0 !important;
+    }
+
+    .msgapi .gn-main-header .dropdown-menu li a,
+    .msgapi .gn-main-header .dropdown-menu .dropdown-item,
+    .msgapi .gn-language-selector .dropdown-menu li a,
+    html body .gn-main-header .dropdown-menu li a {
+        color: #ffffff !important;
+        padding: 8px 16px !important;
+        background: transparent !important;
+    }
+
+    .msgapi .gn-main-header .dropdown-menu li a:hover,
+    .msgapi .gn-main-header .dropdown-menu .dropdown-item:hover,
+    .msgapi .gn-language-selector .dropdown-menu li a:hover,
+    html body .gn-main-header .dropdown-menu li a:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #FFC107 !important;
+    }
+
+    .msgapi .gn-main-header .dropdown-menu li.active a,
+    .msgapi .gn-main-header .dropdown-menu li a.active,
+    html body .gn-main-header .dropdown-menu li.active a {
+        background-color: rgba(244, 180, 0, 0.25) !important;
+        color: #ffffff !important;
+    }
+
+    /* ===========================================
+   ELEMENTOS DURANTE CARREGAMENTO
+   =========================================== */
+    .msgapi .gn-main-header .gn-menu-index,
+    .msgapi .gn-main-header .gn-menu-index a,
+    .msgapi .gn-main-header nav a,
+    .msgapi .gn-main-header .navbar-nav a,
+    .msgapi .gn-main-header .navbar-nav>li>a {
+        color: #ffffff !important;
+        text-decoration: none !important;
+    }
+
+    .msgapi .gn-main-header .gn-skeleton,
+    .msgapi .gn-main-header [class*="skeleton"],
+    .msgapi .gn-main-header [class*="placeholder"] {
+        opacity: 0 !important;
+    }
+
+    .msgapi .gn-main-header .gn-menu-index-link,
+    .msgapi .gn-main-header .gn-main-nav-link {
+        color: #ffffff !important;
+        background: transparent !important;
+    }
+
+    .msgapi .gn-main-header .btn-default,
+    .msgapi .gn-main-header .btn-tray,
+    .msgapi .gn-main-header .gn-menu-container .btn,
+    .msgapi .gn-main-header .gn-action-navbar-container>*,
+    .msgapi .gn-main-header [role="button"] {
+        background-color: transparent !important;
+        background-image: none !important;
+        background: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .msgapi .gn-main-header .btn,
+    .msgapi .gn-main-header button,
+    .msgapi .gn-main-header [role="button"] {
+        color: #ffffff !important;
+    }
+
+    .msgapi .gn-main-header,
+    .msgapi .gn-brand-navbar,
+    .msgapi #gn-brand-navbar {
+        background-color: #2B2B2B !important;
+        min-height: 50px !important;
+    }
+
+    .msgapi .gn-menu-container,
+    .msgapi .gn-main-header .nav,
+    .msgapi .gn-main-header .navbar-nav {
+        background: transparent !important;
+    }
+
+    .msgapi .gn-main-header .nav>li,
+    .msgapi .gn-main-header .navbar-nav>li,
+    .msgapi .gn-main-header .gn-menu-container>* {
+        background: transparent !important;
+    }
+
+    .msgapi .gn-main-header [class*="btn"][class*="tray"],
+    .msgapi .gn-main-header .gn-filter-form,
+    .msgapi .gn-action-navbar-container .gn-filter-form {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .msgapi .gn-main-header {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* ===========================================
+   HERO / JUMBOTRON
+   =========================================== */
+    .msgapi .gn-hero {
+        background-color: #2B2B2B !important;
+        min-height: 200px !important;
+        max-height: 250px !important;
+        height: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 15px 0 !important;
+    }
+
+    .msgapi .gn-hero .jumbotron {
+        background: transparent !important;
+        padding: 20px 0 !important;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .msgapi .gn-home-section,
+    .msgapi #gn-home-featured-resources,
+    .msgapi .gn-resource-grid {
+        margin-top: 0 !important;
+        padding-top: 20px !important;
+    }
+
+    .msgapi .gn-hero h1,
+    .msgapi .gn-hero .gn-hero-description h1 {
+        color: #ffffff !important;
+        font-size: 3rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 20px !important;
+    }
+
+    .msgapi .gn-hero p,
+    .msgapi .gn-hero .gn-hero-description p {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 1.3rem !important;
+    }
+
+    /* ===========================================
+   CARDS DE RECURSOS
+   =========================================== */
+    .msgapi .gn-card {
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        overflow: hidden !important;
+    }
+
+    .msgapi .gn-card:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .msgapi .gn-card-title {
+        font-weight: 600 !important;
+        color: #2B2B2B !important;
+    }
+
+    /* ===========================================
+   BOTÕES
+   =========================================== */
+    .msgapi .btn-primary {
+        background-color: #F4B400 !important;
+        border-color: #F4B400 !important;
+        border-radius: 4px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .msgapi .btn-primary:hover {
+        background-color: #D68A00 !important;
+        border-color: #D68A00 !important;
+        transform: translateY(-2px) !important;
+    }
+
+    .msgapi .btn-default {
+        border-radius: 4px !important;
+    }
+
+    /* ===========================================
+   CONTAINER E LAYOUT
+   =========================================== */
+    .msgapi .gn-container {
+        padding: 40px 0 !important;
+    }
+
+    .msgapi .gn-content {
+        max-width: 1200px !important;
+        margin: 0 auto !important;
+    }
+
+    /* ===========================================
+   FOOTER
+   =========================================== */
+    .msgapi .gn-footer {
+        background-color: #2B2B2B !important;
+        color: #ffffff !important;
+        padding: 30px 0 !important;
+    }
+
+    .msgapi .gn-footer a {
+        color: #fff !important;
+        font-size: 1rem !important;
+    }
+
+    .msgapi .gn-footer a:hover {
+        color: #FFC107 !important;
+    }
+
+    /* ===========================================
+   SEÇÃO DE RECURSOS EM DESTAQUE
+   =========================================== */
+    .msgapi #gn-home-featured-resources-grid {
+        padding: 20px 0 !important;
+    }
+
+    .msgapi .gn-resources-grid-title {
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+        color: #2B2B2B !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* ===========================================
+   GOOGLE FONTS
+   =========================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+</style>
+
+<script>
+    // Corrige o título e subtítulo do Hero após o HTML renderizar
+    (function () {
+        var heroTitle = "GeoSky";
+        var heroSubtitle = "Compartilhando dados geoespaciais e mapas";
+
+        function fixHeroText() {
+            // Tenta encontrar o h1 dentro do hero
+            var h1 = document.querySelector('.gn-hero h1, .gn-hero-description h1, #gn-hero h1');
+            var p = document.querySelector('.gn-hero p, .gn-hero-description p, #gn-hero p');
+
+            if (h1 && h1.textContent !== heroTitle) {
+                h1.textContent = heroTitle;
+            }
+            if (p && !p.textContent.includes(heroSubtitle)) {
+                p.textContent = heroSubtitle;
+            }
+        }
+
+        // Executa imediatamente
+        fixHeroText();
+
+        // Executa após o DOM carregar
+        document.addEventListener('DOMContentLoaded', fixHeroText);
+
+        // Observa mudanças no DOM para corrigir quando o HTML renderizar
+        var observer = new MutationObserver(function (mutations) {
+            fixHeroText();
+        });
+
+        // Começa a observar quando o documento estiver pronto
+        if (document.body) {
+            observer.observe(document.body, { childList: true, subtree: true });
+        } else {
+            document.addEventListener('DOMContentLoaded', function () {
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
+
+        // Para de observar após 10 segundos para não consumir recursos
+        setTimeout(function () {
+            observer.disconnect();
+        }, 10000);
+    })();
+</script>
+{% endblock %}

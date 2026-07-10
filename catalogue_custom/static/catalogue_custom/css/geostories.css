@@ -1,0 +1,680 @@
+@import url("/static/geonode/css/brand-tokens.css");
+/* ============================================================
+   GEOSTORIES PAGE - Layout fiel ao Figma
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #ffffff;
+  color: #111111;
+}
+
+/* ============================================================
+   HERO BANNER
+   ============================================================ */
+
+.geostories-hero {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+.geostories-hero-slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.geostories-hero-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.geostories-hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.geostories-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
+}
+
+.geostories-hero-content {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  color: #fff;
+  max-width: 480px;
+}
+
+.geostories-hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.geostories-hero-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.geostories-hero-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.hero-dot.active {
+  background: #fff;
+}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+
+.geostories-main-wrapper {
+  background: #EFF0F4;
+  padding-bottom: 60px;
+}
+
+.geostories-main {
+  padding-top: 60px;
+  padding-bottom: 0;
+  max-width: 1311px;
+  margin: 0 auto;
+  padding-left: 57px;
+  padding-right: 57px;
+}
+
+/* ============================================================
+   DESTAQUE GEOSTORY (card grande com imagem)
+   ============================================================ */
+
+.geostory-feature-section {
+  margin-bottom: 64px;
+}
+
+.geostory-feature-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.geostory-feature-image {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.geostory-feature-body {
+  padding: 28px 32px 32px;
+}
+
+.geostory-feature-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.geostory-feature-description {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+
+.geostory-feature-btn {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.geostory-feature-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* ============================================================
+   SEÇÃO EXPLORAR
+   ============================================================ */
+
+.explore-section {
+  padding: 64px 0 72px;
+  background: #fff;
+}
+
+.explore-container {
+  max-width: 1326px;
+  margin: 0 auto;
+  padding: 0 57px;
+}
+
+.explore-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 42px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.explore-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+  align-items: stretch;
+}
+
+.explore-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.explore-main-image {
+  width: 100%;
+  height: 415px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.explore-main-content {
+  padding: 0;
+}
+
+.explore-main-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.explore-main-description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.explore-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: rgba(244, 180, 0, 0.18);
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.explore-link:hover {
+  background: var(--color-primary-light);
+}
+
+.explore-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.explore-sidebar-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  background: #fff;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  /* border-bottom: 1px solid #e8e8e8; */
+  flex: 1;
+}
+
+.explore-sidebar-item:first-child {
+  padding-top: 0;
+}
+
+.explore-sidebar-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* .explore-sidebar-item:hover {
+  opacity: 0.8;
+} */
+
+.explore-sidebar-image-wrapper {
+  /* flex-shrink: 0; */
+  width: 170px;
+  height: 170px;
+  border-radius: 10px;
+  /* overflow: hidden; */
+}
+
+.explore-sidebar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.explore-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  flex: 1 0 0;
+  /* min-width: 0; */
+}
+
+.explore-sidebar-title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  color: #111;
+  line-height: normal;
+}
+
+.explore-sidebar-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+/* ============================================================
+   PRINCIPAIS DADOS DO PROJETO
+   ============================================================ */
+
+.project-data-section {
+  padding: 64px 0 72px;
+  background: #fff;
+}
+
+.project-data-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 57px;
+}
+
+/* ============================================================
+   CAROUSEL SECTION
+   ============================================================ */
+
+.carousel-section {
+  margin-bottom: 56px;
+}
+
+.carousel-section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111111;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.carousel-divider {
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+  margin-left: 16px;
+}
+
+.container-title-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.carousel-track-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-track-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 60px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 24px;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 4px;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track .resource-card {
+  scroll-snap-align: start;
+}
+
+.carousel-empty {
+  color: #999;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.carousel-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 40px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #D8D9E0;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.carousel-btn:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   RESOURCE CARD
+   ============================================================ */
+
+.resource-card {
+  flex: 0 0 260px;
+  width: 260px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.resource-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.resource-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: #f0f2f5;
+}
+
+.resource-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.resource-card-image--placeholder,
+.resource-card-image--broken {
+  width: 100%;
+  height: 100%;
+  background: #e8eaed;
+}
+
+.resource-card-favorite {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ff0000;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.resource-card-favorite:hover {
+  color: #e05a5a;
+}
+
+.resource-card-favorite .fa-solid {
+  color: #e05a5a;
+}
+
+.resource-card-body {
+  padding: 14px 16px 16px;
+}
+
+.resource-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.resource-card-meta-left {
+  display: flex;
+  align-items: center;
+}
+
+.resource-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: rgba(244, 180, 0, 0.18);
+  border-radius: 4px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.resource-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.resource-card-description {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  min-height: 38px;
+}
+
+.resource-card-button {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.resource-card-button:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  background: var(--color-secondary);
+  color: #fff;
+  padding: 48px 0 24px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-brand .footer-logo img {
+  height: 36px;
+  margin-bottom: 16px;
+}
+
+.footer-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.footer-column h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 24px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .geostories-main,
+  .explore-container,
+  .project-data-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .geostories-hero-content {
+    left: 24px;
+    bottom: 40px;
+  }
+
+  .geostories-hero-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .geostories-hero {
+    height: 300px;
+  }
+}

@@ -1,0 +1,27 @@
+version: '3.9'
+
+# Override automático para desenvolvimento
+# Docker Compose carrega este arquivo automaticamente
+
+services:
+  django:
+    environment:
+      - DJANGO_SETTINGS_MODULE=geonode.settings
+      - DEBUG=True
+      # Desabilitar cache em desenvolvimento
+      - CACHES_DISABLED=True
+    volumes:
+      # Montar estáticos para reload automático
+      - ./geonode/static/geonode:/usr/src/geonode/geonode/static/geonode
+      - ./catalogue_custom/static:/usr/src/geonode/catalogue_custom/static
+      - ./home_custom/static:/usr/src/geonode/home_custom/static
+      - statics:/mnt/volumes/statics
+
+  # Montar código fonte no nginx para servir estáticos direto
+  geonode:
+    volumes:
+      - nginx-confd:/etc/nginx
+      - nginx-certificates:/geonode-certificates
+      - statics:/mnt/volumes/statics
+      # Código fonte montado para servir CSS direto
+      - ./:/usr/src/geonode:ro

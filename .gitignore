@@ -97,4 +97,10 @@ scripts/spcgeonode/_volume_*
 !hooks/*
 
 .env
+.env.backup-merge
+
+# Import workspace and archives (local merge sources)
+/_import/
+geonode.zip
+geovis-master.zip
 

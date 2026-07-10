@@ -1,0 +1,120 @@
+@import url("/static/geonode/css/brand-tokens.css");
+/**
+ * iframe-overrides.css
+ * Estilos injetados no iframe do catálogo GeoNode
+ * para ocultar navbar e footer
+ */
+
+/* ========================================
+   OCULTAR NAVBAR DO GEONODE
+   ======================================== */
+#gn-topbar,
+.gn-menu,
+.gn-main-header,
+.gn-brand-navbar,
+header#gn-brand-navbar,
+header.gn-main-header,
+nav#gn-brand-navbar,
+nav.gn-brand-navbar,
+.ms2-header,
+div[class*="ms2-header"],
+nav[class*="gn-menu"],
+[class*="gn-main-header"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+
+/* ========================================
+   OCULTAR FOOTER COMPLETAMENTE
+   ======================================== */
+footer,
+.footer,
+.gn-footer,
+.ms-footer,
+.footer-custom,
+div[class*="footer"]:not([class*="toolbar"]),
+[class*="footer"]:not([class*="toolbar"]),
+[id*="footer"],
+div[id*="footer"],
+.gn-footer-placeholder,
+#footer,
+.ms2-footer,
+[class*="ms-footer"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  z-index: -9999 !important;
+  pointer-events: none !important;
+}
+
+/* ========================================
+   AJUSTAR ESPAÇAMENTOS
+   ======================================== */
+html {
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  min-height: 100vh !important;
+}
+
+html,
+body {
+  overflow-x: hidden !important;
+}
+
+/* ========================================
+   CONTAINERS PRINCIPAIS
+   ======================================== */
+#ms-container,
+#gn-container,
+.ms2-application,
+#root,
+.gn-desktop,
+.fill,
+[data-ms2-container],
+.ms-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ========================================
+   ESTILIZAR HEADER E FOOTER DO MAPSTORE
+   ======================================== */
+
+/* Header do MapStore (topo com navbar de ações) */
+.gn-main-header-placeholder,
+div.gn-main-header-placeholder {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Navbar de ações do MapStore (topo) */
+#ms-action-navbar,
+div#ms-action-navbar {
+  padding: 10px !important;
+  margin-top: 0 !important;
+}
+

@@ -1,0 +1,52 @@
+{% load static %}
+<!-- NAVBAR INTERNA (páginas internas exceto home) -->
+<nav class="navbar-internal">
+  <a href="/" class="navbar-internal-brand">
+    <img src="{% static 'geonode/img/8d/logo-light.png' %}?v=20260709f" alt="8D Tecnologia" />
+  </a>
+
+  <button class="navbar-internal-toggle" id="navbarInternalToggle" aria-label="Menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="navbar-internal-menu" id="navbarInternalMenu">
+    <li><a href="/">Home</a></li>
+    <li><a href="/catalogue/#/">Todos os Recursos</a></li>
+    <li><a href="/datasets/">Datasets</a></li>
+    <li><a href="/documents/">Documentos</a></li>
+    <li><a href="/maps/">Mapas</a></li>
+    <li><a href="/geostories/">GeoStories</a></li>
+    <li><a href="/dashboards/">Dashboards</a></li>
+    <li><a href="/about">Sobre</a></li>
+  </ul>
+
+  <div class="navbar-internal-actions">
+    <div class="navbar-internal-user">
+      <button class="navbar-internal-user-btn" id="userMenuButton">
+        {% if user.is_authenticated %}
+          <span class="navbar-internal-user-initial">{{ user.username|slice:':1'|upper }}</span>
+        {% else %}
+          <i class="fa-regular fa-user"></i>
+        {% endif %}
+      </button>
+      <div class="navbar-internal-user-dropdown" id="userMenuDropdown">
+        {% if user.is_authenticated %}
+          <a href="/people/profile/{{ user.username }}/">Perfil</a>
+          <a href="/social/recent-activity">Atividade recente</a>
+          <a href="/catalogue/search/#/?f=favorite">Favoritos</a>
+          <hr />
+          <a href="/admin/">Admin</a>
+          <a href="/geoserver/">GeoServer</a>
+          <hr />
+          <a href="/people/">Pessoas</a>
+          <a href="/groups/">Grupos</a>
+          <hr />
+          <a href="/help/">Ajuda</a>
+          <a href="/account/logout/">Sair</a>
+        {% else %}
+          <a href="/account/login/">Entrar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

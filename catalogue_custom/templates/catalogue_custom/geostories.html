@@ -1,0 +1,218 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoStories - 8D Tecnologia</title>
+    <link rel="icon" type="image/png" href="{% static 'catalogue_custom/img/8d/logo-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'geonode/css/brand-tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/navbar_internal.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/geostories.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <!-- FIM FONT -->
+  </head>
+
+  <body>
+    <!-- NAVBAR INTERNA -->
+    {% include 'snippets/navbar_internal.html' %}
+
+    <!-- HERO BANNER -->
+    <section class="geostories-hero">
+      <div class="geostories-hero-slides" id="heroSlides">
+        <div class="geostories-hero-slide">
+          <img src="{% static 'catalogue_custom/img/wireframe-gold.png' %}?v=20260710" alt="GeoStories Banner" />
+          <div class="geostories-hero-overlay"></div>
+          <div class="geostories-hero-content">
+            <h1 class="geostories-hero-title">Narrativas geográficas interativas</h1>
+            <p class="geostories-hero-description">Combine mapas, imagens e textos para contar histórias com dados espaciais de forma clara e envolvente.</p>
+          </div>
+        </div>
+        <div class="geostories-hero-slide">
+          <img src="{% static 'catalogue_custom/img/image2.png' %}" alt="GeoStories Slide 2" />
+          <div class="geostories-hero-overlay"></div>
+          <div class="geostories-hero-content">
+            <h1 class="geostories-hero-title">Narrativas geográficas interativas</h1>
+            <p class="geostories-hero-description">Combine mapas, imagens e textos para contar histórias com dados espaciais de forma clara e envolvente.</p>
+          </div>
+        </div>
+        <div class="geostories-hero-slide">
+          <img src="{% static 'catalogue_custom/img/image3.png' %}" alt="GeoStories Slide 3" />
+          <div class="geostories-hero-overlay"></div>
+          <div class="geostories-hero-content">
+            <h1 class="geostories-hero-title">Narrativas geográficas interativas</h1>
+            <p class="geostories-hero-description">Combine mapas, imagens e textos para contar histórias com dados espaciais de forma clara e envolvente.</p>
+          </div>
+        </div>
+      </div>
+      <div class="geostories-hero-dots" id="heroDots">
+        <span class="hero-dot active" onclick="goToSlide(0)"></span>
+        <span class="hero-dot" onclick="goToSlide(1)"></span>
+        <span class="hero-dot" onclick="goToSlide(2)"></span>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="geostories-main-wrapper">
+    <main class="geostories-main">
+
+      <!-- GEOSTORY EM DESTAQUE -->
+      {% if featured_geostory %}
+      <section class="geostory-feature-section">
+        <div class="geostory-feature-card">
+          {% if featured_geostory.thumbnail_url %}
+            <img src="{{ featured_geostory.thumbnail_url }}" alt="{{ featured_geostory.title }}" class="geostory-feature-image" />
+          {% else %}
+            <img src="{% static 'catalogue_custom/img/image2.png' %}" alt="GeoStory" class="geostory-feature-image" />
+          {% endif %}
+          <div class="geostory-feature-body">
+            <h2 class="geostory-feature-title">{{ featured_geostory.title }}</h2>
+            <p class="geostory-feature-description">
+              {% if featured_geostory.abstract %}
+                {{ featured_geostory.abstract|striptags|truncatechars:300 }}
+              {% else %}
+                Explore geostories publicadas na plataforma e descubra novas formas de apresentar informações geográficas.
+              {% endif %}
+            </p>
+            <a href="{{ featured_geostory.detail_url }}" class="geostory-feature-btn">Abrir GeoStory</a>
+          </div>
+        </div>
+      </section>
+      {% else %}
+      <section class="geostory-feature-section">
+        <div class="geostory-feature-card">
+          <img src="{% static 'catalogue_custom/img/image2.png' %}" alt="GeoStory" class="geostory-feature-image" />
+          <div class="geostory-feature-body">
+            <h2 class="geostory-feature-title">Geostories</h2>
+            <p class="geostory-feature-description">Explore geostories publicadas na plataforma e crie novas narrativas a partir dos seus dados geoespaciais.</p>
+            <a href="/catalogue/#/?filter{resource_type.in}=geostory" class="geostory-feature-btn">Ver todos</a>
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
+    </main>
+    </div>
+
+    <!-- SEÇÃO EXPLORAR -->
+    <section class="explore-section">
+      <div class="explore-container">
+        <h2 class="explore-title">Explorar</h2>
+
+        <div class="explore-grid">
+          <!-- Card principal: Geostories -->
+          <div class="explore-main">
+            <img src="{% static 'catalogue_custom/img/image3.png' %}" alt="Geostories" class="explore-main-image" />
+            <div class="explore-main-content">
+              <h3 class="explore-main-title">Geostories</h3>
+              <p class="explore-main-description">Crie narrativas geográficas interativas combinando mapas, imagens e textos para comunicar histórias com dados espaciais.</p>
+              <a href="/geostories/" class="explore-link">Explorar GeoStories</a>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="explore-sidebar">
+            <!-- Dashboards -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image_3.png' %}" alt="Dashboards" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Dashboards</h4>
+                <p class="explore-sidebar-description">Visualize indicadores e métricas em painéis dinâmicos conectados aos seus dados geoespaciais.</p>
+                <a href="/dashboards/" class="explore-link">Ver Dashboards</a>
+              </div>
+            </div>
+
+            <!-- Mapas -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image_2.png' %}" alt="Mapas" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Mapas</h4>
+                <p class="explore-sidebar-description">Monte e compartilhe mapas web com camadas, estilos e ferramentas de análise integradas.</p>
+                <a href="/maps/" class="explore-link">Ver Mapas</a>
+              </div>
+            </div>
+
+            <!-- Documentos -->
+            <div class="explore-sidebar-item">
+              <div class="explore-sidebar-image-wrapper">
+                <img src="{% static 'geonode/img/image.png' %}" alt="Documentos" class="explore-sidebar-image" />
+              </div>
+              <div class="explore-sidebar-content">
+                <h4 class="explore-sidebar-title">Documentos</h4>
+                <p class="explore-sidebar-description">Armazene, organize e publique documentos técnicos, relatórios e materiais de apoio ao projeto.</p>
+                <a href="/documents/" class="explore-link">Ver Documentos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO: Principais Dados do Projeto -->
+    <section class="project-data-section">
+      <div class="project-data-container">
+        <div class="container-title-bar">
+          <h2 class="carousel-section-title">Principais Dados do Projeto</h2>
+          <div class="carousel-divider"></div>
+        </div>
+
+        <div class="carousel-wrapper" id="carousel-geostories">
+          <button class="carousel-btn carousel-btn-prev" onclick="scrollCarousel('carousel-geostories', -1)">‹</button>
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+              {% for item in geostories %}
+                {% include 'catalogue_custom/snippets/resource_card.html' with resource=item resource_type_label="GEOSTORY" resource_type_icon="fa-book-open" %}
+              {% empty %}
+                <p class="carousel-empty">Nenhuma geostory disponível.</p>
+              {% endfor %}
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn-next" onclick="scrollCarousel('carousel-geostories', 1)">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    {% include 'snippets/footer.html' %}
+
+    <script src="{% static 'catalogue_custom/js/brand-nav.js' %}"></script>
+    <script>
+      // Hero carousel
+      let currentSlide = 0;
+      const totalSlides = 3;
+
+      function goToSlide(index) {
+        currentSlide = index;
+        document.getElementById('heroSlides').style.transform = `translateX(-${index * 100}%)`;
+        document.querySelectorAll('.hero-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      // Auto-advance
+      setInterval(() => {
+        goToSlide((currentSlide + 1) % totalSlides);
+      }, 5000);
+
+      // Carousel scroll
+      function scrollCarousel(carouselId, direction) {
+        const wrapper = document.getElementById(carouselId);
+        const track = wrapper.querySelector('.carousel-track');
+        const cardWidth = 260 + 24;
+        track.scrollBy({ left: direction * cardWidth * 2, behavior: 'smooth' });
+      }
+    </script>
+  </body>
+</html>

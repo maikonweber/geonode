@@ -1,0 +1,269 @@
+@import url("/static/geonode/css/brand-tokens.css");
+/* ============================================================================
+   VARIÁVEIS DO MAPSTORE
+   Mapeia as variáveis CSS do Django Admin para as variáveis do tema MapStore.
+   Não edite aqui — altere o tema via GeoNode Theme Customization no admin.
+   ============================================================================ */
+html[data-theme="light"],
+:root {
+    --primary: var(--ms-primary);
+    --secondary: var(--ms-main-bg);
+    --accent: var(--ms-main-color);
+    --primary-fg: var(--ms-primary-contrast);
+    --body-fg: var(--ms-main-color);
+    --body-bg: var(--ms-main-bg);
+
+    --body-quiet-color: var(--ms-main-color);
+    --body-medium-color: var(--ms-main-color);
+    --body-loud-color: var(--ms-main-color);
+
+    --header-color: var(--ms-main-color);
+    --header-branding-color: var(--ms-main-color);
+    --header-bg: var(--ms-main-bg);
+    --header-link-color: var(--ms-link-color);
+
+    --breadcrumbs-fg: var(--ms-main-color);
+    --breadcrumbs-link-fg: var(--ms-link-color);
+    --breadcrumbs-bg: var(--ms-main-bg);
+
+    --link-fg: var(--ms-link-color);
+    --link-hover-color: var(--ms-link-hover-color);
+    --link-selected-fg: var(--ms-link-hover-color);
+
+    --hairline-color: var(--ms-main-border-color);
+    --border-color: var(--ms-main-border-color);
+
+    --error-fg: var(--ms-danger);
+    --message-success-bg: rgb(from var(--ms-success) r g b / 15%);
+    --message-warning-bg: rgb(from var(--ms-warning) r g b / 15%);
+    --message-error-bg: rgb(from var(--ms-danger) r g b / 15%);
+
+    --darkened-bg: var(--ms-main-variant-bg);
+    --selected-bg: var(--ms-selected-bg);
+    --selected-row: var(--ms-selected-bg);
+
+    --button-fg: var(--ms-button-primary-color);
+    --button-bg: var(--ms-button-primary-bg);
+    --button-hover-bg: var(--ms-button-primary-hover-bg);
+
+    --default-button-bg: var(--ms-button-primary-bg);
+    --default-button-hover-bg: var(--ms-button-primary-hover-bg);
+
+    --close-button-bg: var(--ms-button-primary-bg);
+    --close-button-hover-bg: var(--ms-button-primary-hover-bg);
+
+    --delete-button-bg: var(--ms-button-danger-bg);
+    --delete-button-hover-bg: var(--ms-button-danger-hover-bg);
+
+    --object-tools-fg: var(--ms-button-primary-color);
+    --object-tools-bg: var(--ms-button-primary-bg);
+    --object-tools-hover-bg: var(--ms-button-primary-hover-bg);
+}
+
+/* ============================================================================
+   BASE DO DJANGO ADMIN (padrão — não remover)
+   Estilos originais necessários para o funcionamento do admin.
+   ============================================================================ */
+
+#header,
+div.breadcrumbs {
+    border-bottom: 1px solid var(--ms-main-border-color);
+}
+
+#logo {
+    max-height: 2rem;
+    display: inline;
+    margin-right: 40px;
+}
+
+#nav-filter {
+    background-color: var(--ms-main-bg);
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
+}
+
+.submit-row,
+.paginator {
+    position: sticky;
+    bottom: 0;
+}
+
+.module caption,
+.inline-group h2 {
+    background-color: var(--ms-primary);
+    color: var(--ms-primary-contrast);
+    --header-link-color: var(--ms-primary-contrast);
+    --header-color: var(--ms-primary-contrast);
+}
+
+#user-tools,
+#logout-form button {
+    padding: 0;
+    font-weight: 300;
+    font-size: 0.6875rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* ============================================================================
+   CUSTOMIZAÇÃO SMART SKY
+   Edite este bloco para ajustar o visual do admin.
+   ============================================================================ */
+
+/* --- BACKGROUND ---
+   Imagem de fundo aplicada no body para cobrir toda a página,
+   incluindo o espaço acima do #main (atrás do header fixo). */
+body {
+    background-color: #111111;
+    background-image:
+        linear-gradient(135deg, rgba(17, 17, 17, 0.4) 0%, rgba(43, 43, 43, 0.2) 55%, rgba(244, 180, 0, 0.1) 100%),
+        url('/static/geonode/img/wireframe-gold.png?v=20260710');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* --- HEADER ---
+   Fixo no topo. Transparente por padrão.
+   Recebe a classe .scrolled via JS (admin-header-scroll.js):
+   - Na home (/admin/): fica transparente e aparece ao rolar
+   - Nas demais páginas: já aparece sólido imediatamente */
+#header {
+    background: transparent;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#header.scrolled {
+    background: rgba(43, 43, 43, 0.95);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+}
+
+#header,
+div.breadcrumbs {
+    border-bottom: none;
+}
+
+/* --- BREADCRUMBS ---
+   Oculto pois o título já aparece no corpo da página
+   e o breadcrumb ficava sobreposto ao header fixo. */
+div.breadcrumbs {
+    display: none;
+}
+
+/* --- LAYOUT PRINCIPAL ---
+   Compensa a altura do header fixo (52px) para o conteúdo
+   não ficar escondido atrás dele em nenhuma página. */
+#main {
+    padding-top: 52px;
+}
+
+/* --- SIDEBAR DE NAVEGAÇÃO ---
+   Ajuste de posição para compatibilizar com o header fixo. */
+.main.shifted>#nav-sidebar {
+    margin-left: 0;
+    visibility: visible;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.toggle-nav-sidebar {
+    margin-top: 30px;
+    z-index: 20;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 23px;
+    width: 23px;
+    border: 0;
+    border-right: 1px solid var(--hairline-color);
+    background-color: var(--body-bg);
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--link-fg);
+    padding: 0;
+}
+
+#content-main {
+    float: left;
+    width: 100%;
+    /* border: 2px solid #fff; */
+    /* border-radius: 8px; */
+    /* background-color: #fff; */
+}
+
+/* --- CUSTOMIZAÇÃO DO CONTEÚDO RELACIONADO --- */
+
+#content-related {
+    float: right;
+    width: 260px;
+    position: relative;
+    margin-right: -300px;
+    border-radius: 10px;
+}
+
+#content-related .actionlist li {
+    line-height: 1;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-left: 18px;
+}
+
+.quiet,
+a.quiet:link,
+a.quiet:visited {
+    color: var(--body-quiet-color);
+    font-weight: normal;
+    font-size: 12px;
+}
+
+/* --- LINKS DO HEADER ---
+   Nome do site e ferramentas do usuário (alterar senha, sair). */
+#site-name a:link,
+#site-name a:visited {
+    color: #fff;
+}
+
+#user-tools a,
+#logout-form button {
+    color: #fff !important;
+    margin: 0 20px;
+    border-bottom: none !important;
+    position: relative;
+}
+
+/* Sublinhado animado no hover dos links do header */
+#user-tools a::after,
+#logout-form button::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+#user-tools a:hover::after,
+#logout-form button:hover::after {
+    width: 100%;
+}
+
+#user-tools a:hover,
+#logout-form button:hover {
+    color: #ffffff !important;
+}
+
+/* --- COR DO CONTEÚDO ---
+   Garante texto branco no conteúdo principal sobre o fundo escuro. */
+.main>.content {
+    color: #fff;
+}

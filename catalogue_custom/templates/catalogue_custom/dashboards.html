@@ -1,0 +1,84 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboards - 8D Tecnologia</title>
+    <link rel="icon" type="image/png" href="{% static 'catalogue_custom/img/8d/logo-icon.png' %}" />
+    <link rel="stylesheet" href="{% static 'geonode/css/brand-tokens.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/navbar_internal.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalogue_custom/css/dashboards.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR INTERNA -->
+    {% include 'snippets/navbar_internal.html' %}
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboards-main">
+
+      <!-- BREADCRUMB -->
+      <nav class="dashboards-breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Dashboards</span>
+      </nav>
+
+      <!-- SEÇÃO: Dashboards -->
+      <section class="carousel-section">
+        <div class="container-title-bar">
+          <h2 class="carousel-section-title">Dashboards</h2>
+          <div class="carousel-divider"></div>
+        </div>
+
+        <div class="carousel-wrapper" id="carousel-dashboards">
+          <button class="carousel-btn carousel-btn-prev" onclick="scrollCarousel('carousel-dashboards', -1)">‹</button>
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+              {% for item in dashboards %}
+                {% include 'catalogue_custom/snippets/resource_card.html' with resource=item resource_type_label="DASHBOARD" resource_type_icon="fa-chart-line" %}
+              {% empty %}
+                <p class="carousel-empty">Nenhum dashboard disponível.</p>
+              {% endfor %}
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn-next" onclick="scrollCarousel('carousel-dashboards', 1)">›</button>
+        </div>
+      </section>
+
+      <!-- SEÇÃO: Mapas -->
+      <section class="carousel-section">
+        <div class="container-title-bar">
+          <h2 class="carousel-section-title">Mapas</h2>
+          <div class="carousel-divider"></div>
+        </div>
+        <div class="carousel-wrapper" id="carousel-maps">
+          <button class="carousel-btn carousel-btn-prev" onclick="scrollCarousel('carousel-maps', -1)">‹</button>
+          <div class="carousel-track-container">
+            <div class="carousel-track">
+              {% for item in maps %}
+                {% include 'catalogue_custom/snippets/resource_card.html' with resource=item resource_type_label="MAPA" resource_type_icon="fa-map" %}
+              {% empty %}
+                <p class="carousel-empty">Nenhum mapa disponível.</p>
+              {% endfor %}
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn-next" onclick="scrollCarousel('carousel-maps', 1)">›</button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    {% include 'snippets/footer.html' %}
+
+    <script src="{% static 'catalogue_custom/js/brand-nav.js' %}"></script>
+    <script src="{% static 'catalogue_custom/js/datasets.js' %}"></script>
+  </body>
+</html>

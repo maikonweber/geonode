@@ -1,0 +1,381 @@
+/*
+ * ============================================================================
+ * CUSTOM.CSS - Estilos para Páginas Django Legacy (8D Tecnologia)
+ * ============================================================================
+ */
+
+@import url("brand-tokens.css");
+
+/* ============================================================================
+   HEADER - PÁGINAS LEGACY
+   Estiliza o header que vem do geonode_mapstore_client
+   ============================================================================ */
+
+/* Navbar - fundo azul escuro */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header,
+body.gn-legacy:not([data-ms2-container]) header.gn-main-header,
+body.gn-legacy:not([data-ms2-container]) #gn-brand-navbar,
+body.gn-legacy:not([data-ms2-container]) .gn-brand-navbar,
+body.gn-legacy:not([data-ms2-container]) .ms-main-colors {
+    background-color: var(--gn-header-bg) !important;
+    background: var(--gn-header-bg) !important;
+    --ms-main-bg: var(--color-secondary) !important;
+    --ms-main-color: #ffffff !important;
+}
+
+/* Links na navbar */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header a,
+body.gn-legacy:not([data-ms2-container]) .gn-brand-navbar a,
+body.gn-legacy:not([data-ms2-container]) .ms-main-colors a {
+    color: #ffffff !important;
+}
+
+body.gn-legacy:not([data-ms2-container]) .gn-main-header a:hover,
+body.gn-legacy:not([data-ms2-container]) .gn-brand-navbar a:hover {
+    color: var(--gn-link-hover-color) !important;
+}
+
+/* Campo de busca - container */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header .gn-search-bar,
+body.gn-legacy:not([data-ms2-container]) .gn-main-header [class*="search-bar"],
+body.gn-legacy:not([data-ms2-container]) .gn-main-header .input-group {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+}
+
+/* Campo de busca - input */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header input,
+body.gn-legacy:not([data-ms2-container]) .gn-main-header .form-control {
+    color: #ffffff !important;
+    border: none !important;
+}
+
+body.gn-legacy:not([data-ms2-container]) .gn-main-header input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Botões na navbar */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header .btn,
+body.gn-legacy:not([data-ms2-container]) .gn-main-header button {
+    background-color: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================================
+   BODY E BACKGROUND - PÁGINAS LEGACY
+   Remove a faixa branca entre o header e o conteúdo
+   ============================================================================ */
+
+body.gn-legacy:not([data-ms2-container]):not(.login-page) {
+    background-color: var(--color-secondary) !important;
+    padding-top: 0 !important;
+    margin: 0 !important;
+}
+
+/* Container do MapStore que envolve tudo */
+body.gn-legacy:not([data-ms2-container]) .gn-desktop,
+body.gn-legacy:not([data-ms2-container]) #ms-container,
+body.gn-legacy:not([data-ms2-container]) [class*="gn-main-event"],
+body.gn-legacy:not([data-ms2-container]) [class*="gn-main-event"]>div,
+body.gn-legacy:not([data-ms2-container]) #gn-topbar,
+body.gn-legacy:not([data-ms2-container]) .gn-main-header+div,
+body.gn-legacy:not([data-ms2-container]) header+div,
+body.gn-legacy:not([data-ms2-container]) nav+div {
+    background-color: var(--color-secondary) !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Remove qualquer margem/padding que cria espaço */
+body.gn-legacy:not([data-ms2-container]) .gn-main-header,
+body.gn-legacy:not([data-ms2-container]) header.gn-main-header {
+    margin-bottom: 0 !important;
+}
+
+/* Remove espaço do gn-desktop */
+body.gn-legacy:not([data-ms2-container]) .gn-desktop {
+    padding-top: 0 !important;
+    min-height: 0 !important;
+}
+
+/* ============================================================================
+   CONTEÚDO - PÁGINAS LEGACY
+   ============================================================================ */
+
+/* Container principal */
+body.gn-legacy:not([data-ms2-container]):not(.login-page) #wrap {
+    min-height: calc(100vh - 100px);
+    height: auto;
+    background-color: var(--color-secondary) !important;
+    color: #ddd;
+    padding-top: 50px;
+    /* Espaço mínimo para navbar fixa */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+body.gn-legacy:not([data-ms2-container]):not(.login-page) #wrap>.container {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Remove overflow do body para evitar scroll desnecessário */
+body.gn-legacy:not([data-ms2-container]):not(.login-page) {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Títulos de página */
+body.gn-legacy:not([data-ms2-container]) .page-header {
+    border-bottom: 2px solid var(--gn-header-bg);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+body.gn-legacy:not([data-ms2-container]) .page-header h2 {
+    color: #ddd;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ============================================================================
+   FORMULÁRIOS - PÁGINAS LEGACY
+   ============================================================================ */
+
+/* Layout do formulário de login - ocupa toda a largura */
+body.gn-legacy:not([data-ms2-container]) #wrap>.container>.row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.gn-legacy:not([data-ms2-container]) #wrap>.container>.row>.col-md-8 {
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 36px;
+    background-color: rgba(43, 43, 43, 0.92);
+    border: 1px solid rgba(244, 180, 0, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+/* Logo da empresa dentro do card */
+body.gn-legacy:not([data-ms2-container]) .login-logo {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-top: 0;
+}
+
+body.gn-legacy:not([data-ms2-container]) .login-logo img {
+    max-height: 88px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    background: transparent;
+}
+
+body.gn-legacy:not([data-ms2-container]) .form-control {
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    padding: 12px 14px;
+    height: auto;
+    width: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.gn-legacy:not([data-ms2-container]) .form-control:focus {
+    border-color: var(--gn-primary);
+    box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.25);
+}
+
+/* Labels e texto nos formulários */
+body.gn-legacy:not([data-ms2-container]) label {
+    color: #ddd;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+body.gn-legacy:not([data-ms2-container]) p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+body.gn-legacy:not([data-ms2-container]) .form-group {
+    margin-bottom: 20px;
+}
+
+/* ============================================================================
+   BOTÕES - PÁGINAS LEGACY
+   ============================================================================ */
+
+body.gn-legacy:not([data-ms2-container]) .btn-primary {
+    background: linear-gradient(135deg, #F4B400 0%, #D68A00 100%) !important;
+    border-color: #D68A00 !important;
+    border-radius: 10px !important;
+    padding: 12px 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    color: #111111 !important;
+}
+
+body.gn-legacy:not([data-ms2-container]) .btn-primary:hover,
+body.gn-legacy:not([data-ms2-container]) .btn-primary:focus {
+    background: #D68A00 !important;
+    border-color: #D68A00 !important;
+    color: #111111 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 8px 20px rgba(244, 180, 0, 0.28) !important;
+}
+
+/* ============================================================================
+   LINKS - PÁGINAS LEGACY
+   ============================================================================ */
+
+body.gn-legacy:not([data-ms2-container]) a {
+    color: var(--gn-primary);
+    transition: color 0.2s ease;
+}
+
+body.gn-legacy:not([data-ms2-container]) a:hover {
+    color: var(--gn-primary-dark);
+    text-decoration: none;
+}
+
+/* ============================================================================
+   ELEMENTOS DIVERSOS - PÁGINAS LEGACY
+   ============================================================================ */
+
+body.gn-legacy:not([data-ms2-container]) input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* ============================================================================
+   FOOTER - PÁGINAS LEGACY
+   ============================================================================ */
+
+/* body.gn-legacy:not([data-ms2-container]) .gn-footer {
+    background-color: var(--color-secondary);
+} */
+
+body.gn-legacy:not([data-ms2-container]) .gn-footer a {
+    color: var(--gn-primary);
+    font-size: 1rem;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+}
+
+body.gn-legacy:not([data-ms2-container]) .gn-footer a:hover {
+    color: var(--gn-header-bg);
+    border-bottom: 2px solid var(--color-primary-light);
+}
+
+/* ============================================================================
+   PÁGINA DE LOGIN - SEM HEADER/FOOTER
+   ============================================================================ */
+
+/* Remove scroll da página de login e garante altura completa */
+html:has(body.login-page),
+html.msgapi {
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+body.login-page {
+    overflow: hidden !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    width: 100vw !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+/* Torna containers específicos transparentes (NÃO o body que tem a imagem) */
+body.login-page #wrap,
+body.login-page .container,
+body.login-page .row,
+body.login-page .gn-desktop,
+body.login-page #ms-container,
+body.login-page .lmask,
+body.login-page .gn-main-header-placeholder,
+body.login-page .gn-footer-placeholder,
+body.login-page [class*="gn-main-event"],
+body.login-page [class*="gn-main-event"]>div,
+body.login-page>div:not(#wrap),
+body.login-page #ms2,
+body.login-page .ms2,
+body.login-page [id^="ms"],
+body.login-page [class^="ms-"],
+body.login-page [class*=" ms-"],
+body.login-page .gn-legacy-frame,
+body.login-page .fill {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Mantém o card do formulário com fundo da marca */
+body.login-page .col-md-8 {
+    background-color: rgba(43, 43, 43, 0.92) !important;
+    border: 1px solid rgba(244, 180, 0, 0.28) !important;
+}
+
+/* Esconde o header e footer na página de login */
+body.login-page .gn-main-header,
+body.login-page header.gn-main-header,
+body.login-page .gn-brand-navbar,
+body.login-page #gn-brand-navbar,
+body.login-page .gn-footer,
+body.login-page footer {
+    display: none !important;
+}
+
+/* Ajusta o container principal para ocupar toda a tela */
+body.login-page #wrap {
+    padding-top: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+/* Centraliza o formulário verticalmente */
+body.login-page #wrap>.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: auto;
+    padding: 20px;
+}
+
+/* ============================================================================
+   PÁGINA ABOUT - TEXTO ALINHADO
+   ============================================================================ */
+
+body.gn-legacy:not([data-ms2-container]) .page-header+p,
+body.gn-legacy:not([data-ms2-container]) .page-header~p {
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* ============================================================================
+   FIM DO ARQUIVO
+   ============================================================================ */

@@ -1,0 +1,192 @@
+@import url("/static/geonode/css/brand-tokens.css");
+/* ============================================================
+   NAVBAR INTERNA - Páginas internas (exceto home)
+   Figma: background var(--color-surface), texto escuro, padding 24px 60px
+   ============================================================ */
+
+.navbar-internal {
+  background: var(--color-surface);
+  display: flex;
+  width: 100%;
+  padding: 24px 60px;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--color-border);
+  box-sizing: border-box;
+}
+
+/* Logo */
+.navbar-internal-brand img {
+  height: 52px;
+  width: auto;
+  max-width: 160px;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
+
+/* Menu */
+.navbar-internal-menu {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-internal-menu a {
+  color: #111111;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.2s;
+}
+
+.navbar-internal-menu a:hover {
+  color: var(--color-primary);
+}
+
+/* Link ativo - página atual */
+.navbar-internal-menu a.active {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 2px;
+}
+
+.navbar-internal-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 10px;
+}
+
+.navbar-internal-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+}
+
+@media (max-width: 1024px) {
+  .navbar-internal {
+    padding: 16px clamp(16px, 4vw, 40px);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .navbar-internal-toggle {
+    display: flex;
+    order: 2;
+    margin-left: auto;
+  }
+
+  .navbar-internal-menu {
+    display: none;
+    order: 4;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .navbar-internal-menu.open {
+    display: flex;
+  }
+
+  .navbar-internal-menu a {
+    padding: 12px 0;
+  }
+
+  .navbar-internal-actions {
+    order: 3;
+  }
+}
+
+/* Actions */
+.navbar-internal-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Botão de usuário */
+.navbar-internal-user {
+  position: relative;
+}
+
+.navbar-internal-user-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e4ea;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+
+.navbar-internal-user-btn:hover {
+  background: #cdd2da;
+}
+
+.navbar-internal-user-initial {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* Dropdown */
+.navbar-internal-user-dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1001;
+}
+
+.navbar-internal-user-dropdown.show {
+  display: block;
+}
+
+.navbar-internal-user-dropdown a {
+  display: block;
+  padding: 11px 18px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.navbar-internal-user-dropdown a:hover {
+  background: #f5f5f5;
+}
+
+.navbar-internal-user-dropdown hr {
+  margin: 4px 0;
+  border: none;
+  border-top: 1px solid var(--color-border);
+}

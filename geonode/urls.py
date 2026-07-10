@@ -45,16 +45,26 @@ from geonode.base import register_url_event
 from .people.views import CustomSignupView, CustomLoginView, set_session_language
 from oauth2_provider.urls import app_name as oauth2_app_name, base_urlpatterns, oidc_urlpatterns
 
+# Custom catalogue views (8D Tecnologia)
+from catalogue_custom.views import (
+    DatasetsListView,
+    DocumentsListView,
+    MapsListView,
+    GeoStoriesListView,
+    DashboardsListView,
+)
+
 admin.autodiscover()
 
 js_info_dict = {"domain": "djangojs", "packages": "geonode"}
 
 sitemaps = {"dataset": DatasetSitemap, "map": MapSitemap}
 
-homepage = register_url_event()(TemplateView.as_view(template_name="index.html"))
+homepage = register_url_event()(TemplateView.as_view(template_name="home.html"))
 
 urlpatterns = [
-    re_path(r"^$", homepage, name="home"),
+    re_path(r"^$", include('home_custom.urls')),
+    path('old-home/', homepage, name="old_home"),
     re_path(r"^help/$", TemplateView.as_view(template_name="help.html"), name="help"),
     re_path(r"^developer/$", TemplateView.as_view(template_name="developer.html"), name="developer"),
     re_path(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
@@ -69,14 +79,21 @@ urlpatterns += [
     # ResourceBase views
     re_path(r"^base/", include("geonode.base.urls")),
     re_path(r"^resources/", include("geonode.base.base_urls")),
-    # Dataset views
+    # Dataset views - CUSTOM
+    re_path(r"^datasets/$", DatasetsListView.as_view(), name='dataset_browse'),
     re_path(r"^datasets/", include("geonode.layers.urls")),
     # Remote Services views
     re_path(r"^services/", include("geonode.services.urls")),
-    # Map views
+    # Map views - CUSTOM
+    re_path(r"^maps/$", MapsListView.as_view(), name='map_browse'),
     re_path(r"^maps/", include("geonode.maps.urls")),
-    # Documents views
+    # Documents views - CUSTOM
+    re_path(r"^documents/$", DocumentsListView.as_view(), name='document_browse'),
     re_path(r"^documents/", include("geonode.documents.urls")),
+    # GeoStories views - CUSTOM
+    re_path(r"^geostories/$", GeoStoriesListView.as_view(), name='geostories_browse'),
+    # Dashboards views - CUSTOM
+    re_path(r"^dashboards/$", DashboardsListView.as_view(), name='dashboards_browse'),
     # Apps views
     re_path(r"^apps/", include("geonode.geoapps.urls")),
     # Catalogue views

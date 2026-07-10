@@ -2276,3 +2276,6 @@ FILE_UPLOAD_PERMISSIONS = 0o777
 
 # Enable or not the XLSX / XLS upload
 XLSX_UPLOAD_ENABLED = ast.literal_eval(os.getenv("XLSX_UPLOAD_ENABLED", "False"))
+
+# 8D Tecnologia custom apps — loaded last for template priority
+INSTALLED_APPS += ("home_custom", "catalogue_custom",)

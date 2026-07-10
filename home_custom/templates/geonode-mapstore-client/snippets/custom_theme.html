@@ -1,0 +1,89 @@
+<style>
+    {% block extra_css %}
+        {{ custom_theme.extra_css }}
+    {% endblock %}
+
+    /* 8D Tecnologia — MapStore theme override */
+    :root,
+    .msgapi .gn-theme,
+    .msgapi .gn-theme-default,
+    .msgapi .gn-theme-custom {
+        --ms-primary: #F4B400;
+        --ms-primary-contrast: #111111;
+        --ms-info: #FFC107;
+        --ms-link-color: #D68A00;
+        --ms-link-hover-color: #F4B400;
+        --ms-jumbotron-color: #ffffff;
+        --ms-jumbotron-bg: #2B2B2B;
+        --ms-button-primary-bg: #F4B400;
+        --ms-button-primary-border-color: #D68A00;
+        --ms-button-primary-hover-bg: #D68A00;
+        --ms-button-primary-color: #111111;
+        --ms-focus-color: rgba(244, 180, 0, 0.35);
+        --ms-footer-link-color: #F4B400;
+        --ms-footer-link-hover-color: #FFC107;
+        --ms-loader-primary-color: #F4B400;
+        --ms-loader-primary-fade-color: rgba(244, 180, 0, 0.2);
+        --ms-timeline-selected-bg: rgba(244, 180, 0, 0.08);
+        --ms-timeline-histogram-bg: rgba(244, 180, 0, 0.45);
+        --ms-timeline-histogram-color: #D68A00;
+        --ms-main-bg: #2B2B2B;
+        --ms-main-color: #ffffff;
+    }
+
+    .msgapi .gn-main-header,
+    .msgapi #gn-brand-navbar,
+    .msgapi .gn-brand-navbar,
+    .msgapi .ms-main-colors,
+    #ms-container .gn-main-header {
+        background-color: #2B2B2B !important;
+        background: #2B2B2B !important;
+    }
+
+    .msgapi .gn-brand-navbar a img,
+    .msgapi #gn-brand-navbar a img,
+    .msgapi .gn-brand-logo {
+        height: 48px !important;
+        width: auto !important;
+        max-width: 160px !important;
+        object-fit: contain !important;
+        background: transparent !important;
+    }
+
+    .msgapi .gn-menu a:hover,
+    .msgapi .gn-main-header a:hover,
+    .msgapi .gn-brand-navbar-menu a.active {
+        color: #F4B400 !important;
+    }
+
+    .msgapi .btn-primary,
+    .msgapi .btn.btn-primary {
+        background-color: #F4B400 !important;
+        border-color: #D68A00 !important;
+        color: #111111 !important;
+    }
+
+    .msgapi .btn-primary:hover,
+    .msgapi .btn.btn-primary:hover {
+        background-color: #D68A00 !important;
+        border-color: #D68A00 !important;
+        color: #111111 !important;
+    }
+
+    .msgapi .gn-brand-navbar-menu a.active,
+    .msgapi .gn-brand-navbar-menu li.active a {
+        border-bottom-color: #F4B400 !important;
+        color: #F4B400 !important;
+    }
+
+    .msgapi a,
+    .msgapi .btn-link {
+        color: #D68A00;
+    }
+
+    .msgapi a:hover,
+    .msgapi .btn-link:hover {
+        color: #F4B400;
+    }
+</style>
+{% block content %}{% endblock %}
